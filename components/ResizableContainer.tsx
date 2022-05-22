@@ -8,8 +8,6 @@ const ResizableContainer = (props: PropsWithChildren<{ width?: number }>) => {
   const x = useMotionValue(0);
   const width = useTransform(x, (x) => defaultWidth + x);
 
-  console.log(x.get());
-
   return (
     <div className={`relative w-[${defaultWidth}px]`}>
       <motion.div
