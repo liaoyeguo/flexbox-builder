@@ -9,7 +9,12 @@ const ResizableContainer = (props: PropsWithChildren<{ width?: number }>) => {
   const width = useTransform(x, (x) => defaultWidth + x);
 
   return (
-    <div className={`relative w-[${defaultWidth}px]`}>
+    <div
+      className={"relative"}
+      style={{
+        width: defaultWidth,
+      }}
+    >
       <motion.div
         className={`p-4 bg-white shadow-md rounded overflow-hidden`}
         style={{ width }}
