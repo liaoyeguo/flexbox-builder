@@ -16,7 +16,7 @@ const ResizableContainer = (props: PropsWithChildren<{ width?: number }>) => {
       }}
     >
       <motion.div
-        className={`p-4 bg-white shadow-md rounded overflow-hidden`}
+        className={`bg-white shadow-md rounded overflow-hidden`}
         style={{ width }}
       >
         {children}

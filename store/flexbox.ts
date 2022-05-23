@@ -3,11 +3,9 @@ import { makeAutoObservable } from "mobx";
 import { nanoid } from "nanoid";
 import { createContext, useContext } from "react";
 
-const makeFlexItem = (): ItemConfig => ({
-  id: nanoid(),
-});
+const makeFlexItem = (): ItemConfig => new ItemConfig();
 
-class ContanerConfig {
+export class ContanerConfig {
   horizontal = true;
   justifyContent: CSSProperties["justifyContent"] = "flex-start";
   alignItems: CSSProperties["alignItems"] = "stretch";
@@ -19,8 +17,14 @@ class ContanerConfig {
   }
 }
 
-class ItemConfig {
+export class ItemConfig {
   id: string;
+  isFixedSize = false;
+  width = "80px";
+  height = "64px";
+  grow = 1;
+  shrink = 1;
+  basis = "auto";
 
   constructor() {
     this.id = nanoid();
@@ -36,6 +40,7 @@ export default class FlexBoxStore {
   containerConfig = new ContanerConfig();
 
   constructor() {
+    this.selection = this.items[0].id;
     makeAutoObservable(this);
   }
 
@@ -47,9 +52,15 @@ export default class FlexBoxStore {
     this.selection = val;
   };
 
-  activeItemConfig = () => {
-    return this.items.find((item) => item.id === this.selection);
+  delete = (id: string) => {
+    const idx = this.items.findIndex((item) => item.id === id);
+    if (idx > -1) this.items.splice(idx, 1);
+    this.selection = "root";
   };
+  get activeItemConfig() {
+    const res = this.items.find((item) => item.id === this.selection);
+    return res;
+  }
 }
 
 const CTX = createContext(new FlexBoxStore());

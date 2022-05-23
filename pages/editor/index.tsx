@@ -7,6 +7,7 @@ import { observer } from "mobx-react-lite";
 import FlexBoxStore from "../../store/flexbox";
 import { BsPlus } from "react-icons/bs";
 import ContainerPanel from "../../components/ContainerPanel";
+import FlexItemPanel from "../../components/FlexItemPanel";
 
 const EditorPage: NextPage = () => {
   const store = useMemo(() => new FlexBoxStore(), []);
@@ -19,7 +20,7 @@ const EditorPage: NextPage = () => {
 
 const Content = observer(() => {
   const store = useFlexBoxStore();
-  const items = store.items;
+  const { items, selection } = store;
 
   return (
     <div className="h-screen bg-gradient-to-r from-fuchsia-500 to-purple-600">
@@ -32,13 +33,28 @@ const Content = observer(() => {
           <BsPlus />
         </div>
         <ResizableContainer>
-          <FlexBox>
-            {items.map(({ id }) => {
-              return <FlexItem key={id} />;
+          <FlexBox
+            config={store.containerConfig}
+            onClick={() => {
+              store.select("root");
+            }}
+          >
+            {items.map((config) => {
+              return (
+                <FlexItem
+                  key={config.id}
+                  config={config}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    store.select(config.id);
+                  }}
+                  isSelected={selection === config.id}
+                />
+              );
             })}
           </FlexBox>
         </ResizableContainer>
-        <ContainerPanel />
+        {selection === "root" ? <ContainerPanel /> : <FlexItemPanel />}
       </div>
     </div>
   );
