@@ -6,11 +6,11 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
   all: "unset",
   width: 42,
   height: 24,
-  backgroundColor: colors.indigo[700],
+  backgroundColor: colors.indigo[500],
   borderRadius: "9999px",
   position: "relative",
   WebkitTapHighlightColor: "rgba(0, 0, 0, 0)",
-  '&[data-state="checked"]': { backgroundColor: colors.indigo[900] },
+  '&[data-state="checked"]': { backgroundColor: colors.indigo[700] },
 });
 
 const StyledThumb = styled(SwitchPrimitive.Thumb, {
