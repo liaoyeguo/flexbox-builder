@@ -81,9 +81,9 @@ export const FlexItem = observer(
 
     const classnames = cx(
       "bg-indigo-600 rounded-lg overflow-hidden text-white ring-indigo-800",
-      "flex justify-center items-center text-xs flex-col select-none hover:bg-indigo-500 cursor-pointer",
+      "flex justify-center items-center text-xs flex-col select-none hover:bg-indigo-700 cursor-pointer",
       {
-        "ring-4": isSelected,
+        "bg-indigo-800": isSelected,
       }
     );
     return (
