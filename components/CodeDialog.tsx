@@ -35,7 +35,7 @@ const FlexBox = () => {
   const css = `
 .container{
   display: flex;
-  ${containerConfig.horizontal ? "" : "flex-direction: containerConfig;"}
+  ${containerConfig.horizontal ? "" : "flex-direction: column;"}
   justify-content: ${containerConfig.justifyContent};
   align-items: ${containerConfig.alignItems};
   ${containerConfig.gap === undefined ? "" : `gap: ${containerConfig.gap};`}
