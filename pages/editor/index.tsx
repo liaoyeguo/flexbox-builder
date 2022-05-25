@@ -9,6 +9,7 @@ import ContainerPanel from "../../components/ContainerPanel";
 import FlexItemPanel from "../../components/FlexItemPanel";
 import { PlusIcon } from "@radix-ui/react-icons";
 import CodeDialog from "../../components/CodeDialog";
+import Header from "../../components/Header";
 
 const EditorPage: NextPage = () => {
   const store = useMemo(() => new FlexBoxStore(), []);
@@ -26,7 +27,8 @@ const Content = observer(() => {
   return (
     <>
       <div className="h-screen bg-gradient-to-r from-fuchsia-500 to-purple-600">
-        <div className="pt-[120px] pl-[120px]">
+        <Header />
+        <div className="pt-[60px] pl-[120px]">
           <div className="flex gap-2">
             <div
               className="bg-black/40 w-5 h-5 px-1 py-1 flex justify-center items-center 
@@ -59,7 +61,7 @@ const Content = observer(() => {
               })}
             </FlexBox>
           </ResizableContainer>
-          {selection === "root" ? <ContainerPanel /> : <FlexItemPanel />}
+          {selection !== "root" ? <FlexItemPanel /> : <ContainerPanel />}
         </div>
       </div>
     </>

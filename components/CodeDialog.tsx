@@ -1,10 +1,10 @@
 import { DialogClose } from "@radix-ui/react-dialog";
 import { CodeIcon } from "@radix-ui/react-icons";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { ContanerConfig, ItemConfig, useFlexBoxStore } from "../store/flexbox";
 import Button from "./Button";
 import CodeBlock from "./CodeBlock";
-import Dialog, { DialogFooter } from "./Dialog";
+import Dialog from "./Dialog";
 import Tabs from "./Tabs";
 import prettier from "prettier/standalone";
 import babelParser from "prettier/parser-babel";
@@ -49,6 +49,7 @@ ${itemConfigs
       ? `
   width: ${item.width};
   height: ${item.height};
+  flex: 0 0 ${item.width};
   `
       : `
   flex: ${item.grow} ${item.shrink} ${item.basis};
@@ -68,10 +69,6 @@ ${itemConfigs
 
 const CodeDialog = () => {
   const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    setVisible(true);
-  }, []);
 
   return (
     <>

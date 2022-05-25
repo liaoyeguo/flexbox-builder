@@ -1,4 +1,5 @@
 import { CSSProperties } from "@stitches/react";
+import { merge } from "lodash-es";
 import { makeAutoObservable } from "mobx";
 import { nanoid } from "nanoid";
 import { createContext, useContext } from "react";
@@ -12,7 +13,21 @@ export class ContanerConfig {
   gap: CSSProperties["gap"] = "8px";
   wrap = false;
 
-  constructor() {
+  constructor(
+    horizontal?: boolean,
+    justifyContent?: CSSProperties["justifyContent"],
+    alignItems?: CSSProperties["alignItems"],
+    gap?: CSSProperties["gap"],
+    wrap?: boolean
+  ) {
+    merge(this, {
+      horizontal,
+      justifyContent,
+      alignItems,
+      gap,
+      wrap,
+    });
+
     makeAutoObservable(this);
   }
 }
@@ -22,12 +37,27 @@ export class ItemConfig {
   isFixedSize = false;
   width = "80px";
   height = "64px";
-  grow = 1;
+  grow = 0;
   shrink = 1;
   basis = "auto";
 
-  constructor() {
+  constructor(
+    isFixedSize?: boolean,
+    width?: string,
+    height?: string,
+    grow?: number,
+    shrink?: number,
+    basis?: string
+  ) {
     this.id = nanoid();
+    merge(this, {
+      isFixedSize,
+      width,
+      height,
+      grow,
+      shrink,
+      basis,
+    });
     makeAutoObservable(this, {
       id: false,
     });
