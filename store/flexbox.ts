@@ -65,13 +65,17 @@ export class ItemConfig {
 }
 
 export default class FlexBoxStore {
-  items = [makeFlexItem(), makeFlexItem()];
-  selection?: "root" | string;
-  containerConfig = new ContanerConfig();
+  items: ItemConfig[] = [];
+  selection?: "root" | string = "root";
+  containerConfig: ContanerConfig;
 
   constructor() {
-    this.selection = this.items[0].id;
     makeAutoObservable(this);
+    this.containerConfig = new ContanerConfig();
+    this.items = [
+      new ItemConfig(true, "80px", "64px"),
+      new ItemConfig(false, undefined, undefined, 1, 1, "auto"),
+    ];
   }
 
   pushItem = () => {
